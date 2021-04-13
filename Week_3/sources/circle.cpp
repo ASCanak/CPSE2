@@ -18,7 +18,7 @@ void circle::draw(sf::RenderWindow & window){
 void circle::screen_object_write(){
 	std::ofstream myFile;
 	myFile.open("map.txt", std::ios_base::app);
-		myFile << "CIRCLE " << "(" << position.x << "," << position.y << ") " << size << " " << color << " " << std::endl;
+		myFile << "CIRCLE " << "(" << position.x << "," << position.y << ") red " << size << std::endl;
 	myFile.close();
 }
 

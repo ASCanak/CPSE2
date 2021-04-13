@@ -11,7 +11,7 @@ public:
     
     popup{std::string("unknown color [") + name + "]"}{}
 
-    const char * what() const noexcept override{  //https://github.com/catchorg/Catch2/issues/755
+    const char * what() const noexcept override{
         return popup.c_str();
     }
 };

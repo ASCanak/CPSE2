@@ -1,0 +1,3 @@
+RECTANGLE (483,146)  (700,320) blue
+CIRCLE (200,240) red 90
+PICTURE (403,443)  (400,320) assets/BackgroundTile.png 

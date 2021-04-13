@@ -18,7 +18,7 @@ void rectangle::draw(sf::RenderWindow & window){
 void rectangle::screen_object_write(){
 	std::ofstream myFile;
 	myFile.open("map.txt", std::ios_base::app);
-		myFile << "RECTANGLE " << "(" << position.x << "," << position.y << ") " << " (" << size.x << "," << size.y << ") " << color << " " << std::endl;
+		myFile << "RECTANGLE " << "(" << position.x << "," << position.y << ") " << " (" << size.x << "," << size.y << ") blue" << std::endl;
 	myFile.close();
 }
 

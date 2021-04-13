@@ -63,7 +63,7 @@ drawable* screen_object_read(std::ifstream &input){
     input >> id;
 
     if(id == "CIRCLE"){
-        input >> position >> size_f >> color;
+        input >> position >> color >> size_f;
         return new circle(position, size_f, color);
     }
     else if(id == "PICTURE"){
