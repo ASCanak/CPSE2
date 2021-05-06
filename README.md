@@ -1,2 +1,2 @@
 # CPSE2
-Ahmet Serdar Canak (1760039)
+Ahmet Serdar Çanak (1760039)
