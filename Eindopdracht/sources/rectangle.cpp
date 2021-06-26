@@ -15,8 +15,8 @@ void rectangle::draw(sf::RenderWindow & window){
 	window.draw(object);
 }
 
-void rectangle::screen_object_write(std::string textfileName){
-	std::ofstream myFile;
+std::string rectangle::getScreenObject(){
+	std::string objectData;
 	std::string strColor;
 	
 	if(color == sf::Color::Black)strColor = "black";
@@ -28,9 +28,19 @@ void rectangle::screen_object_write(std::string textfileName){
 	else if(color == sf::Color(44,47,51))strColor = "dark_grey";
 	else if(color == sf::Color(35,39,42))strColor = "darker_grey";
 
-	myFile.open(textfileName, std::ios_base::app);
-		myFile << "RECTANGLE " << "(" << position.x << "," << position.y << ") " << " (" << size.x << "," << size.y << ") " << strColor << std::endl;
-	myFile.close();
+	objectData.append("RECTANGLE (");
+	objectData.append(std::to_string(int(position.x)));
+	objectData.append(",");
+	objectData.append(std::to_string(int(position.y)));
+	objectData.append(") (");
+	objectData.append(std::to_string(int(size.x)));
+	objectData.append(",");
+	objectData.append(std::to_string(int(size.y)));
+	objectData.append(") ");
+	objectData.append(strColor);
+	objectData.append("\n");
+
+	return objectData;
 }
 
 sf::Vector2f rectangle::getPos(){

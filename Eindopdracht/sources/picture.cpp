@@ -6,28 +6,41 @@ picture::picture(sf::Vector2f position, sf::Vector2f size, std::string fileName,
     fileName{fileName},
 	color{color}
 {
-    if(!texture.loadFromFile(fileName))
-        std::cout << "couldn't find image" << fileName << "\n";
-    texture.setSmooth(true);
-	spriteBox.setOutlineColor(color);
-	spriteBox.setOutlineThickness(1);
+    if(!texture.loadFromFile(fileName)){
+		spriteBox.setOutlineColor(sf::Color::Red);
+		spriteBox.setOutlineThickness(8);
+	}
+    else{
+		texture.setSmooth(true);
+		spriteBox.setTexture(&texture);
+		spriteBox.setOutlineThickness(1);
+		spriteBox.setOutlineColor(color);
+	}
 	spriteBox.setFillColor(sf::Color::White);
 	spriteBox.setPosition(position);
     spriteBox.setSize(size);
-    spriteBox.setTexture(&texture);
 }
 
 void picture::draw(sf::RenderWindow & window){
-	spriteBox.setPosition(position);
 	window.draw(spriteBox);
 }
 
-void picture::screen_object_write(std::string textfileName){
-	std::ofstream myFile;
+std::string picture::getScreenObject(){
+	std::string objectData;
+	
+	objectData.append("PICTURE (");
+	objectData.append(std::to_string(int(position.x)));
+	objectData.append(",");
+	objectData.append(std::to_string(int(position.y)));
+	objectData.append(") (");
+	objectData.append(std::to_string(int(size.x)));
+	objectData.append(",");
+	objectData.append(std::to_string(int(size.y)));
+	objectData.append(") ");
+	objectData.append(fileName);
+	objectData.append(" \n");
 
-	myFile.open(textfileName, std::ios_base::app);
-		myFile << "PICTURE " << "(" << position.x << "," << position.y << ") " << " (" << size.x << "," << size.y << ") " << fileName << " " << std::endl;
-	myFile.close();
+	return objectData;
 }
 
 sf::Vector2f picture::getPos(){
@@ -44,6 +57,7 @@ void picture::jump(sf::Vector2f target){
 	position = target;
     position.x -= size.x * 0.5;
     position.y -= size.y * 0.5;
+	spriteBox.setPosition(position);
 }
 
 void picture::jump(sf::Vector2i target){

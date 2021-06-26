@@ -20,7 +20,7 @@ int main(){
 	std::ifstream objectsIn(textfileName);
 	std::vector<drawable*> objects;
 
-// FACTORY IN
+// FACTORY READ/Input
 	try{
 		for(;;)
 			objects.push_back(screen_object_read(objectsIn)); //objects.insert(objects.begin(), screen_object_read(input));
@@ -106,14 +106,12 @@ int main(){
 							item -> jump(sf::Mouse::getPosition(window));
 					}
 					else if(!selectedObjectID && state == selectorTool){
-						if(event.mouseButton.button == sf::Mouse::Left){
-							if(item -> collisionCheck(sf::Mouse::getPosition(window))){
-								item -> jump(sf::Mouse::getPosition(window));
-								objects.push_back(item);
-								objects.erase(objects.begin()+i);
-								activeObject = true;
-								selectedObjectID = objects.size()-1;
-							}
+						if(event.mouseButton.button == sf::Mouse::Left && item -> collisionCheck(sf::Mouse::getPosition(window))){
+							item -> jump(sf::Mouse::getPosition(window));
+							objects.push_back(item);
+							objects.erase(objects.begin()+i);
+							activeObject = true;
+							selectedObjectID = objects.size()-1;
 						}
 					}
 					if(event.mouseButton.button == sf::Mouse::Left){
@@ -139,11 +137,11 @@ int main(){
 		sf::sleep(sf::milliseconds(20));	
 	}
 
-// FACTORY OUT
+// FACTORY WRITE/OUTPUT
 	std::ofstream myFile;
 	myFile.open(textfileName, std::ofstream::trunc);
 		for(auto &item : objects)
-			item -> screen_object_write(textfileName);
+			myFile << item -> getScreenObject();
 	myFile.close();
 
 	std::cout << "Terminating application\n";

@@ -15,20 +15,27 @@ void circle::draw(sf::RenderWindow & window){
 	window.draw(object);
 }
 
-void circle::screen_object_write(std::string textfileName){
-	std::ofstream myFile;
+std::string circle::getScreenObject(){
+	std::string objectData;
 	std::string strColor;
-	
-	if(color == sf::Color::Black)strColor = "black";
-	else if(color == sf::Color::Red)strColor = "red";
-	else if(color == sf::Color::Green)strColor = "green";
-	else if(color == sf::Color::Blue)strColor = "blue";
-	else if(color == sf::Color::Yellow)strColor = "yellow";
-	else if(color == sf::Color::Magenta)strColor = "magenta";
 
-	myFile.open(textfileName, std::ios_base::app);
-		myFile << "CIRCLE " << "(" << position.x << "," << position.y << ") " << strColor << ' ' << size << std::endl;
-	myFile.close();
+	if(color == sf::Color::Black)strColor = " black ";
+	else if(color == sf::Color::Red)strColor = " red ";
+	else if(color == sf::Color::Green)strColor = " green ";
+	else if(color == sf::Color::Blue)strColor = " blue ";
+	else if(color == sf::Color::Yellow)strColor = " yellow ";
+	else if(color == sf::Color::Magenta)strColor = " magenta ";
+
+	objectData.append("CIRCLE (");
+	objectData.append(std::to_string(int(position.x)));
+	objectData.append(",");
+	objectData.append(std::to_string(int(position.y)));
+	objectData.append(")");
+	objectData.append(strColor);
+	objectData.append(std::to_string(int(size)));
+	objectData.append("\n");
+
+	return objectData;
 }
 
 sf::Vector2f circle::getPos(){

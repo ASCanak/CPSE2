@@ -16,7 +16,7 @@ public:
 	
 	void draw(sf::RenderWindow & window) override;
 
-    void screen_object_write(std::string textfileName) override;
+    std::string getScreenObject() override;
 
 	sf::Vector2f getPos() override;
 
