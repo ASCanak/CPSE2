@@ -1,11 +1,10 @@
-#include "../headers/actions.hpp"
 #include "../headers/circle.hpp"
 #include "../headers/drawable.hpp"
 #include "../headers/exceptions.hpp"
 #include "../headers/factory.hpp"
+#include "../headers/line.hpp"
 #include "../headers/picture.hpp"
 #include "../headers/rectangle.hpp"
-
 
 int main(int argc, char *argv[]){
 	sf::RenderWindow window{ sf::VideoMode{ 1280, 720 }, "SFML window" };
@@ -29,7 +28,7 @@ int main(int argc, char *argv[]){
 		window.clear();
 			for(auto &item : objects){
 				if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-					item -> collisionCheck(sf::Mouse::getPosition(window));
+					item -> jumpOnCollision(sf::Mouse::getPosition(window));
 				item -> draw(window);
 			}
 		window.display();
@@ -46,7 +45,7 @@ int main(int argc, char *argv[]){
 	std::ofstream myFile;
 	myFile.open("map.txt", std::ofstream::trunc);
 		for(auto &item : objects)
-			item -> screen_object_write();
+			myFile << item -> getScreenObject();
 	myFile.close();
 
 	std::cout << "Terminating application\n";

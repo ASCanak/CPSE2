@@ -15,24 +15,31 @@ void circle::draw(sf::RenderWindow & window){
 	window.draw(object);
 }
 
-void circle::screen_object_write(){
-	std::ofstream myFile;
-	myFile.open("map.txt", std::ios_base::app);
-		myFile << "CIRCLE " << "(" << position.x << "," << position.y << ") red " << size << std::endl;
-	myFile.close();
+std::string circle::getScreenObject(){
+	std::string objectData;
+	
+	objectData.append("CIRCLE (");
+	objectData.append(std::to_string(position.x));
+	objectData.append(",");
+	objectData.append(std::to_string(position.y));
+	objectData.append(") red ");
+	objectData.append(std::to_string(size));
+	objectData.append("\n");
+
+	return objectData;
 }
 
 sf::Vector2f circle::getPos(){
 	return object.getPosition();
 }
 
-void circle::collisionCheck(sf::Vector2f target){
+void circle::jumpOnCollision(sf::Vector2f target){
     if((target.x >= position.x && target.y >= position.y) && (target.x <= (position.x + (size * 2)) && target.y <= (position.y + (size * 2))))
         jump(target); 
 }
     
-void circle::collisionCheck(sf::Vector2i target){
-    collisionCheck( sf::Vector2f( 
+void circle::jumpOnCollision(sf::Vector2i target){
+    jumpOnCollision( sf::Vector2f( 
 		static_cast<float>(target.x), 
 		static_cast<float>(target.y)
 	));

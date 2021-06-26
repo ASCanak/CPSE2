@@ -4,6 +4,7 @@
 #include "drawable.hpp"
 #include "exceptions.hpp"
 #include "circle.hpp"
+#include "line.hpp"
 #include "picture.hpp"
 #include "rectangle.hpp"
 
@@ -65,6 +66,10 @@ drawable* screen_object_read(std::ifstream &input){
     if(id == "CIRCLE"){
         input >> position >> color >> size_f;
         return new circle(position, size_f, color);
+    }
+    else if(id == "LINE"){
+        input >> position >> size_2f >> color;
+        return new line(position, size_2f, color);
     }
     else if(id == "PICTURE"){
         input >> position >> size_2f >> fileName;

@@ -9,10 +9,10 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := circle.cpp  picture.cpp rectangle.cpp
+SOURCES := circle.cpp line.cpp picture.cpp rectangle.cpp
 
 # header files in this project
-HEADERS := actions.hpp circle.hpp drawable.hpp exceptions.hpp factory.hpp picture.hpp rectangle.hpp
+HEADERS := circle.hpp drawable.hpp exceptions.hpp factory.hpp line.hpp picture.hpp rectangle.hpp
 
 # other places to look for files for this project
 SEARCH  := sources headers

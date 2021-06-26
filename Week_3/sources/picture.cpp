@@ -5,11 +5,16 @@ picture::picture(sf::Vector2f position, sf::Vector2f size, std::string fileName)
 	size{size},
     fileName{fileName}
 {
-    if(!texture.loadFromFile(fileName))
-        std::cout << "couldn't find image" << fileName << "\n";
-    spriteBox.setPosition(position);
+    if(!texture.loadFromFile(fileName)){
+        spriteBox.setFillColor(sf::Color::White);
+		spriteBox.setOutlineColor(sf::Color::Red);
+		spriteBox.setOutlineThickness(8);
+	}
+    else
+		spriteBox.setTexture(&texture);
+	
+	spriteBox.setPosition(position);
     spriteBox.setSize(size);
-    spriteBox.setTexture(&texture);
 }
 
 void picture::draw(sf::RenderWindow & window){
@@ -17,24 +22,35 @@ void picture::draw(sf::RenderWindow & window){
 	window.draw(spriteBox);
 }
 
-void picture::screen_object_write(){
-	std::ofstream myFile;
-	myFile.open("map.txt", std::ios_base::app);
-		myFile << "PICTURE " << "(" << position.x << "," << position.y << ") " << " (" << size.x << "," << size.y << ") " << fileName << " " << std::endl;
-	myFile.close();
+std::string picture::getScreenObject(){
+	std::string objectData;
+	
+	objectData.append("PICTURE (");
+	objectData.append(std::to_string(position.x));
+	objectData.append(",");
+	objectData.append(std::to_string(position.y));
+	objectData.append(") (");
+	objectData.append(std::to_string(size.x));
+	objectData.append(",");
+	objectData.append(std::to_string(size.y));
+	objectData.append(") ");
+	objectData.append(fileName);
+	objectData.append(" \n");
+
+	return objectData;
 }
 
 sf::Vector2f picture::getPos(){
 	return spriteBox.getPosition();
 }
 
-void picture::collisionCheck(sf::Vector2f target){
+void picture::jumpOnCollision(sf::Vector2f target){
     if((target.x >= position.x && target.y >= position.y) && (target.x <= (position.x + size.x) && target.y <= (position.y + size.y)))
         jump(target); 
 }
     
-void picture::collisionCheck(sf::Vector2i target){
-    collisionCheck( sf::Vector2f( 
+void picture::jumpOnCollision(sf::Vector2i target){
+    jumpOnCollision( sf::Vector2f( 
 		static_cast<float>(target.x), 
 		static_cast<float>(target.y)
 	));

@@ -1,19 +1,19 @@
-#ifndef CIRCLE_HPP
-#define CIRCLE_HPP
+#ifndef LINE_HPP
+#define LINE_HPP
 
 #include "../headers/drawable.hpp"
 
-class circle : public drawable{
+class line : public drawable{
 private:
-	sf::CircleShape object;
+	sf::RectangleShape object;
     
     sf::Vector2f position;
-    float size;
+	sf::Vector2f size;
     sf::Color color;
 
 public:
-	circle(sf::Vector2f position, float size = 10.0, sf::Color color = sf::Color::White);
-
+	line(sf::Vector2f position, sf::Vector2f size, sf::Color color = sf::Color::Red);
+	
 	void draw(sf::RenderWindow & window) override;
 
     std::string getScreenObject() override;
@@ -24,7 +24,7 @@ public:
     void jumpOnCollision(sf::Vector2i target) override;
 
     void jump(sf::Vector2f target);
-	void jump(sf::Vector2i target);
+    void jump(sf::Vector2i target);
 };
 
 #endif

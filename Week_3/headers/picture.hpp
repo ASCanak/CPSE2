@@ -17,12 +17,12 @@ public:
 	
 	void draw(sf::RenderWindow & window) override;
 
-    void screen_object_write() override;
+    std::string getScreenObject() override;
 
 	sf::Vector2f getPos() override;
 
-    void collisionCheck(sf::Vector2f target) override;
-    void collisionCheck(sf::Vector2i target) override;
+    void jumpOnCollision(sf::Vector2f target) override;
+    void jumpOnCollision(sf::Vector2i target) override;
 
     void jump(sf::Vector2f target);
     void jump(sf::Vector2i target);
